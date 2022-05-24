@@ -5,6 +5,7 @@ import Cart from './Cart'
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import AddForm from './AddForm'
 class  App extends React.Component{
   constructor() {
     super()
@@ -64,7 +65,7 @@ getCartCount = ()=>{
   var count = products.reduce((total,product)=>{
     return total+product.qty;
   },0)
-  console.log(count)
+  // console.log(count)
   return count
 }
 getTotalPrice = ()=>{
@@ -75,16 +76,42 @@ getTotalPrice = ()=>{
   // console.log(count)
   return count
 }
+addItem = (event)=>{
+  event.preventDefault();
+  const title = document.getElementById('name').value;
+  const price = document.getElementById('price').value;
+  const img = document.getElementById('image').value;
+  if (title === '' || img === '' || price === '') {
+    return 
+  }
+  
+  const{products} = this.state;
+  const id = products.length+1;
+  const qty=0;
+  const newProduct = {
+    title,price,qty,img,id
+  }
+  products.push(newProduct)
+  console.log(products)
+  this.setState({
+    products
+  })
+  
+}
   render(){
     const {products} = this.state
     return (
       <div className="App">
         <Navbar count={this.getCartCount()}/>
-        <Cart
-        products = {products}
-        increaseQty = {this.handleIncreaseQuantity} 
-        decreaseQty = {this.handleDecreaseQuantity}
-        deleteProduct = {this.handleDeleteProduct}/>
+        <div className="container">
+          <Cart
+            products = {products}
+            increaseQty = {this.handleIncreaseQuantity} 
+            decreaseQty = {this.handleDecreaseQuantity}
+            deleteProduct = {this.handleDeleteProduct}/>
+          <AddForm 
+           addItem = {this.addItem}/>
+        </div>
         <Footer price={this.getTotalPrice()}/>
       </div>
       );
