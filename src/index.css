@@ -31,3 +31,29 @@ body {
   display : flex;
   flex-direction: column;
 }
+.navbar{
+  display : flex;
+  flex-direction : row;
+  justify-content : space-between;
+  height: 150px;
+  background-color: teal;
+}
+.LOGO{
+  display : flex; 
+  flex-direction : row; 
+  justify-content : flex-end;
+  height : 100%
+}
+.LOGO img{
+  height : 75%;
+  margin : 15px 20px 0px 0px;
+}
+.count{
+  /* width: 15px; */
+  position : absolute;
+  top : -19;
+  right : 0;
+  border-radius : 50%;
+  background-color:yellow;
+  padding : 8px 16px;
+}
